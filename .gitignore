@@ -1,0 +1,10 @@
+# Directorio de entorno virtual (opcional pero recomendado)
+venv/
+.venv/
+
+# Archivos de credenciales y secretos
+credenciales.json
+.env
+
+# Archivos de Log generados
+*.log
