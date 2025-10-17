@@ -102,7 +102,7 @@ def update_price(sku, price):
                 logging.error(f"❌ Error actualizando SKU {sku}: {update_response.text}")
         else:
             logging.warning(f"⚠️ No se encontró producto con SKU {sku}")
-
+            
     except Exception as e:
         logging.error(f"⚠️ Error procesando SKU {sku}: {e}")
 

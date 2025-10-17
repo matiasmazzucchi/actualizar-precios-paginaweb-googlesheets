@@ -1,0 +1,37 @@
+# cloudbuild.yaml
+steps:
+# 1. Construye la imagen de contenedor usando el Dockerfile
+# La imagen se etiqueta con la región y el nombre del repositorio de Artifact Registry, y el hash del commit ($COMMIT_SHA)
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-t',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:$COMMIT_SHA',
+    '.'
+  ]
+
+# 2. Sube la imagen a Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:$COMMIT_SHA'
+  ]
+
+# Opcional: También etiquetamos y subimos como 'latest' para fácil referencia
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'tag',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:$COMMIT_SHA',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:latest'
+  ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:latest'
+  ]
+  
+# Imágenes que se subirán automáticamente
+images:
+- 'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:$COMMIT_SHA'
+- 'europe-west1-docker.pkg.dev/$PROJECT_ID/mi-repo-artifacs/mi-script-diario:latest'
