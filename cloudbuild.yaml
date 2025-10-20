@@ -34,3 +34,6 @@ steps:
 images:
 - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/precioshondapaginawebgooglesheets/mi-script-diario:$COMMIT_SHA'
 - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/precioshondapaginawebgooglesheets/mi-script-diario:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
